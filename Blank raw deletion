@@ -1,0 +1,29 @@
+'空白行を削除して詰める関数
+Sub Delete_Rows_w_Blank()
+    Dim GYO As Long
+    Dim KuhakuGyo As Range
+    Dim r As Long
+
+  
+    GYO = Cells(Rows.Count, 1).End(xlUp).Row
+  
+    With ActiveSheet
+        For r = 2 To GYO
+      　
+        '"1"は行の最初の要素がブランクだと行を削除する要素とみなすことを意味する。
+        If IsEmpty(Cells(r, 1).Value) Then
+         
+            If KuhakuGyo Is Nothing Then
+                Set KuhakuGyo = .Rows(r).EntireRow
+        
+            Else
+                Set KuhakuGyo = Union(KuhakuGyo, .Rows(r).EntireRow)
+            End If
+        End If
+        Next r
+    End With
+
+    If Not KuhakuGyo Is Nothing Then
+        KuhakuGyo.Delete
+    End If
+End Sub

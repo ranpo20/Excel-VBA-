@@ -1,0 +1,13 @@
+'自動ですべてのシートのピボットテーブルをデータの変更に伴い更新する
+Private Sub Worksheet_Change(ByVal Target As Range)
+
+  Dim pivotTable As pivotTable
+  Dim Worksheet As Worksheet
+  
+  For Each Worksheet In Worksheets
+    For Each pivotTable In Worksheet.PivotTables
+      pivotTable.PivotCache.Refresh '
+    Next
+    
+  Next
+End Sub
